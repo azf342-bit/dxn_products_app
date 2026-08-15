@@ -11,7 +11,7 @@ class DxnProductsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'دليل منتجات DXN',
+      title: 'منتجات DXN',
       theme: ThemeData(
         primarySwatch: Colors.green,
         useMaterial3: true,
@@ -24,11 +24,11 @@ class DxnProductsApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  final List<Map<String, String>> products = const [
+  static const List<Map<String, String>> products = [
     {
       'name': 'قهوة لينجزي 3 في 1',
       'description':
-          'قهوة DXN الشهيرة مع فطر الجانوديرما، مناسبة لمحبي القهوة.',
+          'قهوة DXN الشهيرة مع فطر الجانوديرما، لمحبي القهوة.',
     },
     {
       'name': 'سبيرولينا',
@@ -38,22 +38,17 @@ class HomePage extends StatelessWidget {
     {
       'name': 'مورينزي',
       'description':
-          'مشروب نباتي مصنوع من فاكهة النوني ويُستخدم ضمن نظام غذائي متوازن.',
+          'مشروب نباتي من فاكهة النوني يمكن تناوله ضمن نظام غذائي متوازن.',
     },
     {
-      'name': 'معجون أسنان Ganozhi',
+      'name': 'معجون أسنان جانوزي',
       'description':
-          'معجون أسنان من منتجات DXN للاستخدام اليومي والعناية بالفم.',
+          'معجون أسنان للاستخدام اليومي ضمن منتجات العناية الشخصية.',
     },
     {
       'name': 'صابون جانوزي',
       'description':
-          'صابون للعناية اليومية بالبشرة.',
-    },
-    {
-      'name': 'كريم Tea Tree',
-      'description':
-          'كريم للعناية بالبشرة والاستخدام الخارجي.',
+          'صابون للعناية بالبشرة والاستخدام اليومي.',
     },
   ];
 
@@ -62,30 +57,29 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'دليل منتجات DXN',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          'منتجات DXN',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
         centerTitle: true,
       ),
       body: ListView.builder(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(16),
         itemCount: products.length,
         itemBuilder: (context, index) {
           final product = products[index];
 
           return Card(
-            margin: const EdgeInsets.only(bottom: 12),
-            elevation: 3,
+            margin: const EdgeInsets.only(bottom: 16),
+            elevation: 4,
             child: ListTile(
               contentPadding: const EdgeInsets.all(16),
-              leading: CircleAvatar(
-                radius: 28,
-                child: Text(
-                  '${index + 1}',
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+              leading: const CircleAvatar(
+                radius: 30,
+                child: Icon(
+                  Icons.shopping_bag,
+                  size: 30,
                 ),
               ),
               title: Text(
@@ -99,10 +93,11 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
                   product['description']!,
-                  style: const TextStyle(fontSize: 14),
+                  style: const TextStyle(
+                    fontSize: 14,
+                  ),
                 ),
               ),
-              trailing: const Icon(Icons.arrow_forward_ios),
               onTap: () {
                 Navigator.push(
                   context,
@@ -141,49 +136,35 @@ class ProductPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Center(
-              child: CircleAvatar(
-                radius: 60,
-                child: Text(
-                  name.substring(0, 1),
-                  style: const TextStyle(
-                    fontSize: 45,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+            const Icon(
+              Icons.shopping_bag,
+              size: 100,
             ),
-            const SizedBox(height: 25),
+            const SizedBox(height: 20),
             Text(
               name,
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 20),
             Text(
               description,
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 18,
-                height: 1.6,
               ),
             ),
             const SizedBox(height: 30),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('سيتم إضافة رابط المنتج لاحقًا'),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.link),
-                label: const Text('رابط المنتج'),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text(
+                'معرفة المزيد',
+                style: TextStyle(fontSize: 18),
               ),
             ),
           ],
